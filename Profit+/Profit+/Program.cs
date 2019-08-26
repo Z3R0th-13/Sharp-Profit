@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -174,6 +174,124 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                            }
+                        }
+                    }
+                    if (path.Contains("credential"))
+                    {
+                        if (path.Contains(".txt")) // Text files
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.Contains(".tex")) // Text files
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("Log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.Contains(".text")) // Text files
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+
+                        }
+                        else if (path.EndsWith(".doc")) // Word Documents
+                        {
+                            // Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+
+                        }
+                        else if (path.EndsWith(".docx")) // Word Documents
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+
+                        }
+                        else if (path.EndsWith(".pdf")) // PDF's
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".rtf")) // Rich text format
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".wks")) // Microsoft works file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".wps")) // Microsoft works file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".wpd")) // Microsoft works file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".xls")) // Microsoft Excel file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".ods")) // OpenOffice calc spreadsheet file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".xlr")) // Microsoft works spreadsheet file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            }
+                        }
+                        else if (path.EndsWith(".xlsx")) // Microsoft Excel open XML spreadsheet file
+                        {
+                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
                             }
                         }
                     }
