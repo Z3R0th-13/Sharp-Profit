@@ -459,9 +459,13 @@ namespace Profit
             Banner(); // Print the banner 
             Console.WriteLine("\r\n\r\nStarting #Profit"); // Starting text
             var watch = System.Diagnostics.Stopwatch.StartNew(); // Start the stopwatch
-            string targetDirectory = "C:\\"; // Specifies the starting folder address
-            string regex_pattern = ".";
-            ProcessDirectory(targetDirectory, regex_pattern); // Perform search for specific files
+            DriveInfo[] allDrives = DriveInfo.GetDrives(); // Get list of all drives on FileSystem
+            foreach (DriveInfo d in allDrives) //For loop for drives on FileSystem
+            {
+                string targetDirectory = d.Name; // Declare targetDirectory as the drive names
+                string regex_pattern = "."; // Specifies the file extensions to look for. May need to trim down, lots of files are found.
+                ProcessDirectory(targetDirectory, regex_pattern); // Search for files
+            }
             watch.Stop(); // Stop the watch.
             string inFile = "log.txt"; // Initial file we wrote to
             string outFile = "Profit_Results.txt"; // File that is going to be sorted based off of results
