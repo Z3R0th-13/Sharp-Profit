@@ -49,6 +49,84 @@ namespace Profit
                 //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
             }
         }
+        //string line;
+        public static void Peeper(string path)
+        {
+            try
+            {
+                //int counter = 0;
+                System.IO.StreamReader file = new System.IO.StreamReader(path);
+                foreach (string line in File.ReadAllLines(path))
+                {
+                    if (line.Contains("password"))
+                        Console.WriteLine("Possible password found: {0}, in {1}", line, path);
+                    else if (line.Contains("Password"))
+                    {
+                        Console.WriteLine("Possible password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("PASSWORD"))
+                    {
+                        Console.WriteLine("Possible password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("credential"))
+                    {
+                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("Credential"))
+                    {
+                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("CREDENTIAL"))
+                    {
+                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("creds"))
+                    {
+                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("Creds"))
+                    {
+                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("Admin"))
+                    {
+                        if (line.Contains("Password"))
+                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("ADMIN"))
+                    {
+                        if (line.Contains("Password"))
+                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("admin"))
+                    {
+                        if (line.Contains("Password"))
+                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("Administrator"))
+                    {
+                        if (line.Contains("Password"))
+                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("administrator"))
+                    {
+                        if (line.Contains("Password"))
+                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
+                    }
+                    else if (line.Contains("ADMINISTRATOR"))
+                    {
+                        if (line.Contains("Password"))
+                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
+                    }
+
+                }
+                file.Close();
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
+            }
+        }
 
         // Insert logic for processing found files here.
         public static void ProcessFile(string path, string regex_pattern) // Performs search for defined file extensions
@@ -63,11 +141,14 @@ namespace Profit
                     {
                         if (path.Contains(".txt")) // Text files
                         {
+
                             //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                //Peeper(path);
                             }
+                            Peeper(path);
                         }
                         else if (path.Contains(".tex")) // Text files
                         {
@@ -76,6 +157,7 @@ namespace Profit
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
                             }
+                            Peeper(path);
                         }
                         else if (path.Contains(".text")) // Text files
                         {
@@ -83,6 +165,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
 
                         }
@@ -92,6 +175,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
 
                         }
@@ -101,6 +185,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
 
                         }
@@ -110,6 +195,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".rtf")) // Rich text format
@@ -118,6 +204,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".wks")) // Microsoft works file
@@ -126,6 +213,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".wps")) // Microsoft works file
@@ -134,6 +222,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".wpd")) // Microsoft works file
@@ -142,6 +231,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".xls")) // Microsoft Excel file
@@ -150,6 +240,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".ods")) // OpenOffice calc spreadsheet file
@@ -158,6 +249,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".xlr")) // Microsoft works spreadsheet file
@@ -166,6 +258,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".xlsx")) // Microsoft Excel open XML spreadsheet file
@@ -174,6 +267,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                     }
@@ -185,6 +279,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.Contains(".tex")) // Text files
@@ -193,6 +288,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("Log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.Contains(".text")) // Text files
@@ -201,6 +297,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
 
                         }
@@ -210,6 +307,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
 
                         }
@@ -219,6 +317,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
 
                         }
@@ -228,6 +327,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".rtf")) // Rich text format
@@ -236,6 +336,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".wks")) // Microsoft works file
@@ -244,6 +345,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".wps")) // Microsoft works file
@@ -252,6 +354,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".wpd")) // Microsoft works file
@@ -260,6 +363,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".xls")) // Microsoft Excel file
@@ -268,6 +372,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".ods")) // OpenOffice calc spreadsheet file
@@ -276,6 +381,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".xlr")) // Microsoft works spreadsheet file
@@ -284,6 +390,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".xlsx")) // Microsoft Excel open XML spreadsheet file
@@ -292,6 +399,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                     }
@@ -344,6 +452,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".tex"))
@@ -352,6 +461,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                         else if (path.EndsWith(".text"))
@@ -360,6 +470,7 @@ namespace Profit
                             using (StreamWriter w = File.AppendText("log.txt"))
                             {
                                 w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
+                                Peeper(path);
                             }
                         }
                     }
@@ -423,6 +534,22 @@ namespace Profit
                             w.WriteLine("Possible OUTLOOK PERSONAL FILE found here: '{0}'", path);
                         }
                     }
+                    else if (path.EndsWith(".py"))
+                    {
+                        //Console.WriteLine("Possible OUTLOOK PERSONAL FILE here '{0}'", path);
+                        using (StreamWriter w = File.AppendText("log.txt"))
+                        {
+                            w.WriteLine("Possible Python Script found here: '{0}'", path);
+                        }
+                    }
+                    else if (path.EndsWith(".yaml"))
+                    {
+                        //Console.WriteLine("Possible OUTLOOK PERSONAL FILE here '{0}'", path);
+                        using (StreamWriter w = File.AppendText("log.txt"))
+                        {
+                            w.WriteLine("Possible YAML file found here: '{0}'", path);
+                        }
+                    }
                     else if (path.EndsWith(".settingcontent-ms"))
                     {
                         //Console.WriteLine("Possible SETTINGCONTENT-MS file here '{0}'", path);
@@ -457,7 +584,7 @@ namespace Profit
                 LogDate("ZZZ", w);
             }
             Banner(); // Print the banner 
-            Console.WriteLine("\r\n\r\nStarting #Profit"); // Starting text
+            Console.WriteLine("\r\n\r\nStarting Sharp-Profit"); // Starting text
             var watch = System.Diagnostics.Stopwatch.StartNew(); // Start the stopwatch
             DriveInfo[] allDrives = DriveInfo.GetDrives(); // Get list of all drives on FileSystem
             foreach (DriveInfo d in allDrives) //For loop for drives on FileSystem
@@ -473,7 +600,7 @@ namespace Profit
             Array.Sort(contents); // Sort the contents of inFile
             File.WriteAllLines(outFile, contents); // Write the sorted lines to outFile
             File.Delete("log.txt"); // Get rid of inFile
-            Console.WriteLine("\r\n\r\nProfit finished running in {0} seconds. The results are in Profit_Results.txt", (watch.ElapsedMilliseconds / 1000)); // Print how many seconds have passed since the start of the program.
+            Console.WriteLine("\r\n\r\nSharp-Profit finished running in {0} seconds. The results are in Profit_Results.txt", (watch.ElapsedMilliseconds / 1000)); // Print how many seconds have passed since the start of the program.
         }
     }
 }
