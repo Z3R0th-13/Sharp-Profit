@@ -2,7 +2,7 @@
 
 <img src="https://github.com/Z3R0th-13/Sharp-Profit/blob/master/images/Banner.PNG">
 
-#Profit is a C# version of my Profit script. This version can be utilized with Cobalt Strike's execute-assembly function. Seeing as how most people are moving away from PowerShell I figured this would be a good learning opportunity. This is my first program made in C#, so I’m sure the flow isn’t the greatest. Let me know any improvements that could be made or additional functionality!
+Sharp-Profit is a C# version of my Profit script. This version can be utilized with Cobalt Strike's execute-assembly function. Seeing as how most people are moving away from PowerShell I figured this would be a good learning opportunity. This is my first program made in C#, so I’m sure the flow isn’t the greatest. Let me know any improvements that could be made or additional functionality!
 
 Common files and extensions this program looks for are as follows:
 * Password: (If a user saves a file with password in the name)
