@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Profit+")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Sharp-Profit")]
+[assembly: AssemblyDescription("Will look for interesting files on all drives available. Will also look for some common files with passwords stored in clear text.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Profit+")]
+[assembly: AssemblyCompany("Z3R0th-13")]
+[assembly: AssemblyProduct("Sharp-Profit")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

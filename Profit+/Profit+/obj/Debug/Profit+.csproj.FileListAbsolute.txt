@@ -1,6 +1,0 @@
-C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\obj\Debug\Profit+.csprojResolveAssemblyReference.cache
-C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\bin\Debug\#Profit.exe.config
-C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\bin\Debug\#Profit.exe
-C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\bin\Debug\#Profit.pdb
-C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\obj\Debug\#Profit.exe
-C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\obj\Debug\#Profit.pdb

@@ -21,3 +21,5 @@ Common files and extensions this program looks for are as follows:
 * .yaml (YAML Ain't Markup Language Files)
 
 Sharp-Profit also searches the interesting files found for passwords/credentials. 
+
+I'm currently working on making the code smoother (changing the current searches to case insensitive arrays) in order to make the code more efficient.
