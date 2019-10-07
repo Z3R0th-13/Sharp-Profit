@@ -49,88 +49,72 @@ namespace Profit
                 //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
             }
         }
-        //string line;
+
         public static void Peeper(string path)
         {
-            try
-            {
-                //int counter = 0;
-                System.IO.StreamReader file = new System.IO.StreamReader(path);
-                foreach (string line in File.ReadAllLines(path))
-                {
-                    if (line.Contains("password"))
-                        Console.WriteLine("Possible password found: {0}, in {1}", line, path);
-                    else if (line.Contains("Password"))
-                    {
-                        Console.WriteLine("Possible password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("PASSWORD"))
-                    {
-                        Console.WriteLine("Possible password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("credential"))
-                    {
-                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("Credential"))
-                    {
-                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("CREDENTIAL"))
-                    {
-                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("creds"))
-                    {
-                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("Creds"))
-                    {
-                        Console.WriteLine("Possible credential found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("Admin"))
-                    {
-                        if (line.Contains("Password"))
-                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("ADMIN"))
-                    {
-                        if (line.Contains("Password"))
-                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("admin"))
-                    {
-                        if (line.Contains("Password"))
-                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("Administrator"))
-                    {
-                        if (line.Contains("Password"))
-                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("administrator"))
-                    {
-                        if (line.Contains("Password"))
-                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
-                    }
-                    else if (line.Contains("ADMINISTRATOR"))
-                    {
-                        if (line.Contains("Password"))
-                            Console.WriteLine("Possible Admin Password found: {0}, in {1}", line, path);
-                    }
+            string[] passarray; // Define array for password
+            string[] credarray; // Define array for credential
+            string[] adminarray; // Define array for Administrator
+            string[] Files; // Define Files
 
-                }
-                file.Close();
-            }
-            catch (Exception e)
+            passarray = new string[] { "password", "Password", "PASSWORD", "PASS" }; // Array for passwords
+            credarray = new string[] { "credential", "creds", "CREDENTIAL", "CREDS" }; // Array for credential
+            adminarray = new string[] { "Admin", "admin", "ADMIN" }; // Array for Administrator
+            System.IO.StreamReader file = new System.IO.StreamReader(path); // Read the files in Path
+            Files = File.ReadAllLines(path); // Read all lines in the file.
+
+            foreach (string line in Files) // For each line in the file look for the password string. 
             {
-                //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
+                foreach (string s in passarray)
+                {
+                    if (line.Contains(s))
+                    {
+                        Console.WriteLine("Possible password found: {0} in {1}", line, path);
+                    }
+                }
+            }
+
+            foreach (string line in Files) // For each line in the file look for the credential string.
+            {
+                foreach (string s in credarray)
+                {
+                    if (line.Contains(s))
+                    {
+                        Console.WriteLine("Possible credentials found: {0} in {1}", line, path);
+                    }
+                }
+            }
+
+            foreach (string line in Files) // For each line in the file look for the administrator string
+            {
+                foreach (string s in adminarray)
+                {
+                    if (line.Contains(s))
+                    {
+                        if (line.Contains("pass"))
+                        {
+                            Console.WriteLine("Possible Administrator Credentials found: {0} in {1}", line, path);
+                        }
+                    }
+                }
             }
         }
 
         // Insert logic for processing found files here.
         public static void ProcessFile(string path, string regex_pattern) // Performs search for defined file extensions
         {
+            string[] extensionarray; // Define array for common extensions
+            string[] ntuserarray; // Define array for ntuser.dat
+            string[] samarray; // Define array for sam files
+            string[] hostsarray; // Define array for host files
+            string[] extensionarray2;
+
+            extensionarray = new string[] { ".txt", ".tex", ".text", ".doc", ".docx", ".pdf", ".rtf", ".wks", ".wps", ".wpd", ".xls", ".ods", ".xlr", ".xlsx" }; // Array for common extensions
+            ntuserarray = new string[] { ".DAT" }; // Array for NTUSER.DAT file
+            samarray = new string[] { "config", "repair" }; // Array for SAM file
+            hostsarray = new string[] { "etc" }; // Array for Hosts file
+            extensionarray2 = new string[] { ".kbdx", ".sav", ".sql", ".tar", ".bak", ".pst", ".py", ".yaml" }; // Array for more useful extensions
+
             try
             {
                 // If the file matches regex then print it. If not, do nothing. This will search for specific predefined files and extensions
@@ -139,569 +123,117 @@ namespace Profit
                 {
                     if (path.Contains("password"))
                     {
-                        if (path.Contains(".txt")) // Text files
+                        foreach (string s in extensionarray)
                         {
-
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
+                            if (path.Contains(s))
                             {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                //Peeper(path);
-                            }
-                            Peeper(path);
-                        }
-                        else if (path.Contains(".tex")) // Text files
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("Log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            }
-                            Peeper(path);
-                        }
-                        else if (path.Contains(".text")) // Text files
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".doc")) // Word Documents
-                        {
-                            // Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".docx")) // Word Documents
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".pdf")) // PDF's
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".rtf")) // Rich text format
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wks")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wps")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wpd")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xls")) // Microsoft Excel file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".ods")) // OpenOffice calc spreadsheet file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xlr")) // Microsoft works spreadsheet file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xlsx")) // Microsoft Excel open XML spreadsheet file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible PASSWORD file found here: '{0}'", path);
+                                }
                                 Peeper(path);
                             }
                         }
                     }
                     if (path.Contains("credential"))
                     {
-                        if (path.Contains(".txt")) // Text files
+                        foreach (string s in extensionarray)
                         {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
+                            if (path.Contains(s))
                             {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.Contains(".tex")) // Text files
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("Log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.Contains(".text")) // Text files
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".doc")) // Word Documents
-                        {
-                            // Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".docx")) // Word Documents
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".pdf")) // PDF's
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".rtf")) // Rich text format
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wks")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wps")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wpd")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xls")) // Microsoft Excel file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".ods")) // OpenOffice calc spreadsheet file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xlr")) // Microsoft works spreadsheet file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xlsx")) // Microsoft Excel open XML spreadsheet file
-                        {
-                            //Console.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
+                                }
                                 Peeper(path);
                             }
                         }
                     }
                     if (path.Contains("ConsoleHost_history"))
                     {
-                        if (path.Contains(".txt")) // Text files
+                        foreach (string s in extensionarray)
                         {
-
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
+                            if (path.Contains(s))
                             {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                //Peeper(path);
-                            }
-                            Peeper(path);
-                        }
-                        else if (path.Contains(".tex")) // Text files
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("Log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                            }
-                            Peeper(path);
-                        }
-                        else if (path.Contains(".text")) // Text files
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".doc")) // Word Documents
-                        {
-                            // Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".docx")) // Word Documents
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-
-                        }
-                        else if (path.EndsWith(".pdf")) // PDF's
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".rtf")) // Rich text format
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wks")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wps")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".wpd")) // Microsoft works file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xls")) // Microsoft Excel file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".ods")) // OpenOffice calc spreadsheet file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xlr")) // Microsoft works spreadsheet file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".xlsx")) // Microsoft Excel open XML spreadsheet file
-                        {
-                            //Console.WriteLine("Possible PASSWORD file found here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible PowerShell Log file found here: '{0}'", path);
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible POWERSHELL LOG file found here: '{0}'", path);
+                                }
                                 Peeper(path);
                             }
                         }
                     }
-                    if (path.Contains("NTUSER")) // Search for NTUSER.DAT files.
+                    if (path.Contains("NTUSER"))
                     {
-                        if (path.EndsWith(".DAT"))
+                        foreach (string s in ntuserarray)
                         {
-                            //Console.WriteLine("Possible NTUSER file here '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
+                            if (path.Contains(s))
                             {
-                                w.WriteLine("Possible NTUSER file found here: '{0}'", path);
-                            }
-                        }
-                    }
-                    else if (path.Contains("SAM")) // Search for SAM file.
-                    {
-                        if (path.Contains("config"))
-                        {
-                            //Console.WriteLine("Possible SAM file here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible SAM file found here: '{0}'", path);
-                            }
-                        }
-                        else if (path.Contains("repair"))
-                        {
-                            //Console.WriteLine("Possible SAM file here: '{0}'");
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible SAM file found here: '{0}'", path);
-                            }
-                        }
-                    }
-                    else if (path.Contains("hosts"))
-                    {
-                        if (path.Contains("etc"))
-                        {
-                            //Console.WriteLine("Possible HOSTS file here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible HOSTS file found here: '{0}'", path);
-                            }
-                        }
-                    }
-                    else if (path.Contains("unattend"))
-                    {
-                        if (path.EndsWith(".txt"))
-                        {
-                            //Console.WriteLine("Possible UNATTEND file here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".tex"))
-                        {
-                            //Console.WriteLine("Possible UNATTEND file here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
-                                Peeper(path);
-                            }
-                        }
-                        else if (path.EndsWith(".text"))
-                        {
-                            //Console.WriteLine("Possible UNATTEND file here: '{0}'", path);
-                            using (StreamWriter w = File.AppendText("log.txt"))
-                            {
-                                w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible NTUSER file found here: '{0}'", path);
+                                }
                                 Peeper(path);
                             }
                         }
                     }
-                    else if (path.EndsWith(".kbdx"))
+                    if (path.Contains("SAM"))
                     {
-                        //Console.WriteLine("Possible KEEPASS file here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
+                        foreach (string s in samarray)
                         {
-                            w.WriteLine("Possible KEEPASS file found here: '{0}'", path);
+                            if (path.Contains(s))
+                            {
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible SAM file found here: '{0}'", path);
+                                }
+                                Peeper(path);
+                            }
                         }
                     }
-                    //else if (path.EndsWith(".db")) // I took out due to large number of db files
-                    //{
-                    //    Console.WriteLine("Possible DATABASE file here '{0}'", path);
-                    //}
-                    //else if (path.EndsWith(".dbf")) // I took out due to large number of db files
-                    //{
-                    //    Console.WriteLine("Possible DATABASE file here '{0}'", path);
-                    //}
-                    //else if (path.EndsWith(".mdb")) // I took out due to large number of db files
-                    //{
-                    //    Console.WriteLine("Possible MICROSOFT ACCESS DATABASE file here '{0}'", path);
-                    //}
-                    else if (path.EndsWith(".sav"))
+                    if (path.Contains("hosts"))
                     {
-                        //Console.WriteLine("Possible SAVE file here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
+                        foreach (string s in hostsarray)
                         {
-                            w.WriteLine("Possible SAVE file found here: '{0}'", path);
+                            if (path.Contains(s))
+                            {
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible HOST file found here: '{0}'", path);
+                                }
+                                Peeper(path);
+                            }
                         }
                     }
-                    else if (path.EndsWith(".sql)"))
+                    if (path.Contains("unattend"))
                     {
-                        //Console.WriteLine("Possible SQL file here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
+                        foreach (string s in extensionarray)
                         {
-                            w.WriteLine("Possible SQL file found here: '{0}'", path);
+                            if (path.Contains(s))
+                            {
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
+                                }
+                                Peeper(path);
+                            }
                         }
                     }
-                    else if (path.EndsWith(".tar"))
+                    foreach (string s in extensionarray2)
                     {
-                        //Console.WriteLine("Possible TAR file here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
+                        if (path.EndsWith(s))
                         {
-                            w.WriteLine("Possible TAR file found here: '{0}'", path);
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible {0} file here '{1}'", s, path);
+                            }
                         }
                     }
-                    else if (path.EndsWith(".bak"))
-                    {
-                        //Console.WriteLine("Possible BACKUP file here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
-                        {
-                            w.WriteLine("Possible BACKUP file found here: '{0}'", path);
-                        }
-                    }
-                    else if (path.EndsWith(".pst"))
-                    {
-                        //Console.WriteLine("Possible OUTLOOK PERSONAL FILE here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
-                        {
-                            w.WriteLine("Possible OUTLOOK PERSONAL FILE found here: '{0}'", path);
-                        }
-                    }
-                    else if (path.EndsWith(".py"))
-                    {
-                        //Console.WriteLine("Possible OUTLOOK PERSONAL FILE here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
-                        {
-                            w.WriteLine("Possible Python Script found here: '{0}'", path);
-                        }
-                    }
-                    else if (path.EndsWith(".yaml"))
-                    {
-                        //Console.WriteLine("Possible OUTLOOK PERSONAL FILE here '{0}'", path);
-                        using (StreamWriter w = File.AppendText("log.txt"))
-                        {
-                            w.WriteLine("Possible YAML file found here: '{0}'", path);
-                        }
-                    }
-                    //else if (path.EndsWith(".settingcontent-ms"))
-                    //{
-                        //Console.WriteLine("Possible SETTINGCONTENT-MS file here '{0}'", path);
-                    //    using (StreamWriter w = File.AppendText("log.txt"))
-                    //    {
-                    //        w.WriteLine("Possible SETTINGCONTENT-MS file found here: '{0}'", path);
-                    //    }
-                    //}
-                    else
-                    {
-                        // Do nothing. This is done to suppress the amount of files shown.
-                    }
-                    // Can also do other processing stuff here.
                 }
             }
             catch (Exception e)
             {
-                //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
+                // Fuck nothing
             }
         }
 
@@ -735,6 +267,8 @@ namespace Profit
             File.WriteAllLines(outFile, contents); // Write the sorted lines to outFile
             File.Delete("log.txt"); // Get rid of inFile
             Console.WriteLine("\r\n\r\nSharp-Profit finished running in {0} seconds. The results are in Profit_Results.txt", (watch.ElapsedMilliseconds / 1000)); // Print how many seconds have passed since the start of the program.
+            Console.WriteLine("Press any key to exit");
+            Console.ReadLine();
         }
     }
 }
