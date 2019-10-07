@@ -1,0 +1,6 @@
+C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\obj\Debug\Profit+.csprojResolveAssemblyReference.cache
+C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\bin\Debug\Sharp-Profit.exe.config
+C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\bin\Debug\Sharp-Profit.exe
+C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\bin\Debug\Sharp-Profit.pdb
+C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\obj\Debug\Sharp-Profit.exe
+C:\Users\cloud\documents\visual studio 2017\Projects\Profit+\Profit+\obj\Debug\Sharp-Profit.pdb
