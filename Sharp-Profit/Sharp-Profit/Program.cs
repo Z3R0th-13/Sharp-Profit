@@ -267,8 +267,8 @@ namespace Profit
             File.WriteAllLines(outFile, contents); // Write the sorted lines to outFile
             File.Delete("log.txt"); // Get rid of inFile
             Console.WriteLine("\r\n\r\nSharp-Profit finished running in {0} seconds. The results are in Profit_Results.txt", (watch.ElapsedMilliseconds / 1000)); // Print how many seconds have passed since the start of the program.
-            Console.WriteLine("Press any key to exit");
-            Console.ReadLine();
+            //Console.WriteLine("Press any key to exit");
+            //Console.ReadLine();
         }
     }
 }
