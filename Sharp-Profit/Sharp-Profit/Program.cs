@@ -233,7 +233,7 @@ namespace Profit
             }
             catch (Exception e)
             {
-                // Fuck nothing
+                // Do nothing
             }
         }
 
