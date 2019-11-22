@@ -67,9 +67,20 @@ namespace Profit
             {
                 foreach (string s in passarray)
                 {
-                    if (line.Contains(s))
+                    if (path.Contains("NTUSER.DAT"))
                     {
-                        Console.WriteLine("Possible password found: {0} in {1}", line, path);
+                        // Do Nothing
+                    }
+                    else
+                    {
+                        if (line.Contains(s))
+                        {
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible PASSWORD found: {0} in {1}", line, path);
+                            }
+                            Console.WriteLine("Possible password found: {0} in {1}", line, path);
+                        }
                     }
                 }
             }
@@ -78,9 +89,20 @@ namespace Profit
             {
                 foreach (string s in credarray)
                 {
-                    if (line.Contains(s))
+                    if (path.Contains("NTUSER.DAT"))
                     {
-                        Console.WriteLine("Possible credentials found: {0} in {1}", line, path);
+                        // Do Nothing
+                    }
+                    else
+                    {
+                        if (line.Contains(s))
+                        {
+                            using (StreamWriter w = File.AppendText("log.txt"))
+                            {
+                                w.WriteLine("Possible PASSWORD found: {0} in {1}", line, path);
+                            }
+                            Console.WriteLine("Possible credentials found: {0} in {1}", line, path);
+                        }
                     }
                 }
             }
@@ -91,9 +113,20 @@ namespace Profit
                 {
                     if (line.Contains(s))
                     {
-                        if (line.Contains("pass"))
+                        if (path.Contains("NTUSER.DAT"))
                         {
-                            Console.WriteLine("Possible Administrator Credentials found: {0} in {1}", line, path);
+                            // Do Nothing
+                        }
+                        else
+                        {
+                            if (line.Contains("pass"))
+                            {
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible ADMINISTRATOR PASSWORD found: {0} in {1}", line, path);
+                                }
+                                Console.WriteLine("Possible Administrator Credentials found: {0} in {1}", line, path);
+                            }
                         }
                     }
                 }
@@ -107,13 +140,13 @@ namespace Profit
             string[] ntuserarray; // Define array for ntuser.dat
             string[] samarray; // Define array for sam files
             string[] hostsarray; // Define array for host files
-            string[] extensionarray2;
+            string[] extensionarray2; // Define array for additional file extensions
 
-            extensionarray = new string[] { ".txt", ".tex", ".text", ".doc", ".docx", ".pdf", ".rtf", ".wks", ".wps", ".wpd", ".xls", ".ods", ".xlr", ".xlsx" }; // Array for common extensions
-            ntuserarray = new string[] { ".DAT" }; // Array for NTUSER.DAT file
-            samarray = new string[] { "config", "repair" }; // Array for SAM file
-            hostsarray = new string[] { "etc" }; // Array for Hosts file
-            extensionarray2 = new string[] { ".kbdx", ".sav", ".sql", ".tar", ".bak", ".pst", ".py", ".yaml" }; // Array for more useful extensions
+            extensionarray = new string[] { @".txt", @".tex", @".text", @".doc", @".docx", @".pdf", @".rtf", @".wks", @".wps", @".wpd", @".xls", @".ods", @".xlr", @".xlsx" }; // Array for common extensions
+            ntuserarray = new string[] { @".DAT" }; // Array for NTUSER.DAT file
+            samarray = new string[] { @"config", @"repair" }; // Array for SAM file
+            hostsarray = new string[] { @"etc" }; // Array for Hosts file
+            extensionarray2 = new string[] { @".kbdx", @".sav", @".sql", @".tar", @".bak", @".pst", @".py", @".yaml" }; // Array for more useful extensions
 
             try
             {
@@ -223,9 +256,40 @@ namespace Profit
                     {
                         if (path.EndsWith(s))
                         {
-                            using (StreamWriter w = File.AppendText("log.txt"))
+                            if (path.Contains("C:\\Program Files"))
                             {
-                                w.WriteLine("Possible {0} file here '{1}'", s, path);
+                                // Do Nothing
+                            }
+                            else if (path.Contains("C:\\ProgramData"))
+                            {
+                                // Do Nothing
+                            }
+                            else if (path.Contains("C:\\Python27"))
+                            {
+                                // Do Nothing
+                            }
+                            else if (path.Contains("C:\\Users\\All Users"))
+                            {
+                                // Do Nothing
+                            }
+                            else if (path.Contains("C:\\Windows\\Microsoft"))
+                            {
+                                // Do Nothing
+                            }
+                            else if (path.Contains("C:\\Windows\\WinSxS"))
+                            {
+                                // Do Nothing
+                            }
+                            else if (path.Contains("C:\\Windows\\servicing"))
+                            {
+                                // Do Nothing
+                            }
+                            else
+                            {
+                                using (StreamWriter w = File.AppendText("log.txt"))
+                                {
+                                    w.WriteLine("Possible {0} file here '{1}'", s, path);
+                                }
                             }
                         }
                     }
