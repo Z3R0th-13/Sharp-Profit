@@ -1,12 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-
 namespace Profit
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
+    internal class Program
     {
         public static void Banner() // Define banner to be printed.
         {
@@ -30,23 +30,27 @@ namespace Profit
                 // Process the list of files found in the directory.
                 string[] fileEntries = Directory.GetFiles(targetDirectory);
                 foreach (string fileName in fileEntries)
+                {
                     ProcessFile(fileName, regex_pattern);
+                }
 
                 // Recursively look into subdirectories of this directory
                 string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
                 foreach (string subdirectory in subdirectoryEntries)
+                {
                     try
                     {
                         ProcessDirectory(subdirectory, regex_pattern);
                     }
                     catch (Exception e)
                     {
-                        //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
+                        // Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
                     }
+                }
             }
             catch (Exception e)
             {
-                //Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
+                // Console.WriteLine("Error processing directory - {0} - {1}", targetDirectory, e.Message); // I commented out due to sheer volume of errors
             }
         }
 
@@ -55,15 +59,15 @@ namespace Profit
             string[] passarray; // Define array for password
             string[] credarray; // Define array for credential
             string[] adminarray; // Define array for Administrator
-            string[] Files; // Define Files
+            string[] files; // Define Files
 
             passarray = new string[] { "password", "Password", "PASSWORD", "PASS" }; // Array for passwords
             credarray = new string[] { "credential", "creds", "CREDENTIAL", "CREDS" }; // Array for credential
             adminarray = new string[] { "Admin", "admin", "ADMIN" }; // Array for Administrator
             System.IO.StreamReader file = new System.IO.StreamReader(path); // Read the files in Path
-            Files = File.ReadAllLines(path); // Read all lines in the file.
+            files = File.ReadAllLines(path); // Read all lines in the file.
 
-            foreach (string line in Files) // For each line in the file look for the password string. 
+            foreach (string line in files) // For each line in the file look for the password string. 
             {
                 foreach (string s in passarray)
                 {
@@ -85,7 +89,7 @@ namespace Profit
                 }
             }
 
-            foreach (string line in Files) // For each line in the file look for the credential string.
+            foreach (string line in files) // For each line in the file look for the credential string.
             {
                 foreach (string s in credarray)
                 {
@@ -101,13 +105,14 @@ namespace Profit
                             {
                                 w.WriteLine("Possible PASSWORD found: {0} in {1}", line, path);
                             }
+
                             Console.WriteLine("Possible credentials found: {0} in {1}", line, path);
                         }
                     }
                 }
             }
 
-            foreach (string line in Files) // For each line in the file look for the administrator string
+            foreach (string line in files) // For each line in the file look for the administrator string
             {
                 foreach (string s in adminarray)
                 {
@@ -125,6 +130,7 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible ADMINISTRATOR PASSWORD found: {0} in {1}", line, path);
                                 }
+
                                 Console.WriteLine("Possible Administrator Credentials found: {0} in {1}", line, path);
                             }
                         }
@@ -168,6 +174,7 @@ namespace Profit
                             }
                         }
                     }
+
                     if (path.Contains("credential"))
                     {
                         foreach (string s in extensionarray)
@@ -178,10 +185,12 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible CREDENTIAL file found here: '{0}'", path);
                                 }
+
                                 Peeper(path);
                             }
                         }
                     }
+
                     if (path.Contains("ConsoleHost_history"))
                     {
                         foreach (string s in extensionarray)
@@ -192,10 +201,12 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible POWERSHELL LOG file found here: '{0}'", path);
                                 }
+
                                 Peeper(path);
                             }
                         }
                     }
+
                     if (path.Contains("NTUSER"))
                     {
                         foreach (string s in ntuserarray)
@@ -206,10 +217,12 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible NTUSER file found here: '{0}'", path);
                                 }
+
                                 Peeper(path);
                             }
                         }
                     }
+
                     if (path.Contains("SAM"))
                     {
                         foreach (string s in samarray)
@@ -220,10 +233,12 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible SAM file found here: '{0}'", path);
                                 }
+
                                 Peeper(path);
                             }
                         }
                     }
+
                     if (path.Contains("hosts"))
                     {
                         foreach (string s in hostsarray)
@@ -234,10 +249,12 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible HOST file found here: '{0}'", path);
                                 }
+
                                 Peeper(path);
                             }
                         }
                     }
+
                     if (path.Contains("unattend"))
                     {
                         foreach (string s in extensionarray)
@@ -248,10 +265,12 @@ namespace Profit
                                 {
                                     w.WriteLine("Possible UNATTEND file found here: '{0}'", path);
                                 }
+
                                 Peeper(path);
                             }
                         }
                     }
+
                     foreach (string s in extensionarray2)
                     {
                         if (path.EndsWith(s))
@@ -307,12 +326,13 @@ namespace Profit
             w.WriteLine($"{DateTime.Now.ToLongTimeString()} {DateTime.Now.ToLongDateString()}");
         }
 
-        static void Main(string[] args) //Performs all of the functions.
+        private static void Main(string[] args) //Performs all of the functions.
         {
             using (StreamWriter w = File.AppendText("log.txt")) // Run the LogDate function
             {
                 LogDate("ZZZ", w);
             }
+
             Banner(); // Print the banner 
             Console.WriteLine("\r\n\r\nStarting Sharp-Profit"); // Starting text
             var watch = System.Diagnostics.Stopwatch.StartNew(); // Start the stopwatch
@@ -323,6 +343,7 @@ namespace Profit
                 string regex_pattern = "."; // Specifies the file extensions to look for. May need to trim down, lots of files are found.
                 ProcessDirectory(targetDirectory, regex_pattern); // Search for files
             }
+
             watch.Stop(); // Stop the watch.
             string inFile = "log.txt"; // Initial file we wrote to
             string outFile = "Profit_Results.txt"; // File that is going to be sorted based off of results
@@ -330,7 +351,7 @@ namespace Profit
             Array.Sort(contents); // Sort the contents of inFile
             File.WriteAllLines(outFile, contents); // Write the sorted lines to outFile
             File.Delete("log.txt"); // Get rid of inFile
-            Console.WriteLine("\r\n\r\nSharp-Profit finished running in {0} seconds. The results are in Profit_Results.txt", (watch.ElapsedMilliseconds / 1000)); // Print how many seconds have passed since the start of the program.
+            Console.WriteLine("\r\n\r\nSharp-Profit finished running in {0} seconds. The results are in Profit_Results.txt", watch.ElapsedMilliseconds / 1000); // Print how many seconds have passed since the start of the program.
             //Console.WriteLine("Press any key to exit");
             //Console.ReadLine();
         }
